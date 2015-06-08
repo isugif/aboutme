@@ -80,6 +80,12 @@ alias dT='du -hs * | awk '$1~"T"''
 alias wcp="wc -l - | awk '{s+="'$1'"} END {print s}'"
 alias qf="qn | grep free | wc -l"
 
+#git
+alias gitfix=`perl -i -pe 's/https:\/\//ssh:\/\/git\@/g' .git/config`
+alias gc='git commit -m' 
+alias gpom='git push origin master'
+alias ga='git add'
+
 #############
 # Prompt Configuration
 #############
