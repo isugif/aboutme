@@ -43,6 +43,11 @@ module load parallel
 #module load maker
 #OMPI_MCA_mpi_warn_on_fork=0
 
+#git configuration
+git config --global pack.windowMemory "100m"
+git config --global pack.SizeLimit "100m"
+git config --global pack.threads "2"
+
 # Alias definitions.
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
