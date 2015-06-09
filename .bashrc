@@ -8,7 +8,12 @@ if [ -f /etc/bashrc ]; then
 
 # start-up things
 umask 0022
+if [ `hostname` = "hpc5"]
+module use  /data004/software/GIF/modules
+else if [ `hostname` ="condo" ]
 module use /data003/GIF/software/modules
+fi
+
 module load parallel
 #eval $(perl -I/home/arnstrm/perl5/lib/perl5 -Mlocal::lib)
 #eval $(perl -I/home/severin/perl5/lib/perl5 -Mlocal::lib)
