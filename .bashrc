@@ -11,7 +11,7 @@ umask 0022
 if [ `hostname` = "hpc5" ]
 then
 module use  /data004/software/GIF/modules
-elif [ `hostname` ="condo" ]
+elif [ `hostname` = "condo" ]
 then
 module use /data003/GIF/software/modules
 fi
@@ -63,9 +63,9 @@ alias dT='du -hs * | awk '$1~"T"''
 #severin
 alias wcp="wc -l - | awk '{s+="'$1'"} END {print s}'"
 alias qf="qn | grep free | wc -l"
+alias awkt='awk -F "\t"'
 
 #git
-alias gitfix=`perl -i -pe 's/https:\/\//ssh:\/\/git\@/g' .git/config`
 alias gc='git commit -m' 
 alias gpom='git push origin master'
 alias ga='git add'
