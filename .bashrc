@@ -8,9 +8,11 @@ if [ -f /etc/bashrc ]; then
 
 # start-up things
 umask 0022
-if [ `hostname` = "hpc5"]
+if [ `hostname` = "hpc5" ]
+then
 module use  /data004/software/GIF/modules
-else if [ `hostname` ="condo" ]
+elif [ `hostname` ="condo" ]
+then
 module use /data003/GIF/software/modules
 fi
 
