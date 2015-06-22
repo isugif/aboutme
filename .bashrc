@@ -85,7 +85,8 @@ export HISTTIMEFORMAT="[%F %T] "
 export HISTFILE=~/.bash_eternal_history
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-export PATH="/data003/GIF/software/bin:$PATH"
+export PATH="~/bin:$PATH"
+export PATH="$PATH:~/isugif/ascii_plots"
 ################
 # SHORTCUTS
 ################
