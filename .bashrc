@@ -8,10 +8,10 @@ if [ -f /etc/bashrc ]; then
 
 # start-up things
 umask 0022
-if [ `hostname` = "hpc5" ]
+if [ `grep -v "#" /var/spool/torque/server_name  | grep .` = "hpc5" ]
 then
 module use  /data004/software/GIF/modules
-elif [ `hostname` = "condo" ]
+elif [ `grep -v "#" /var/spool/torque/server_name  | grep .` = "condo" ]
 then
 module use /data003/GIF/software/modules
 fi
