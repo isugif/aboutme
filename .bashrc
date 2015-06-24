@@ -86,7 +86,7 @@ export HISTFILE=~/.bash_eternal_history
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 export PATH="~/bin:$PATH"
-export PATH="$PATH:~/isugif/ascii_plots:~/isugif/oneliners/"
+export PATH="$PATH:~/isugif/common_scripts/:~/isugif/common_analyses/:~/isugif/ascii_plots:~/isugif/oneliners/"
 ################
 # SHORTCUTS
 ################
