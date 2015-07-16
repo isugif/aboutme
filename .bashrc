@@ -64,7 +64,7 @@ alias dT='du -hs * | awk '$1~"T"''
 alias wcp="wc -l - | awk '{s+="'$1'"} END {print s}'"
 alias qf="qn | grep free | wc -l"
 alias awkt='awk -F "\t"'
-
+alias pwd='pwd -P'
 #git
 alias gc='git commit -m' 
 alias gpom='git push origin master'
