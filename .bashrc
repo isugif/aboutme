@@ -69,7 +69,7 @@ alias pwd='pwd -P'
 alias gc='git commit -m' 
 alias gpom='git push origin master'
 alias ga='git add'
-
+alias gpr='find . -type d -name .git -exec sh -c "cd \"{}\"/../ && pwd && git pull" \;'
 #############
 # Prompt Configuration
 #############
