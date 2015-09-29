@@ -14,9 +14,13 @@ module use  /data004/software/GIF/modules
 elif [ `grep -v "#" /var/spool/torque/server_name  | grep .` = "condo" ]
 then
 module use /data003/GIF/software/modules
+export PATH="$PATH:/data003/GIF/software/bin/"
 fi
 
 module load parallel
+#results directory
+module use /data005/GIF2/resultfiles/
+
 #eval $(perl -I/home/arnstrm/perl5/lib/perl5 -Mlocal::lib)
 #eval $(perl -I/home/severin/perl5/lib/perl5 -Mlocal::lib)
 #ulimit -s unlimited
@@ -105,3 +109,11 @@ export TMOUT=0
 ###############
 
 #ulimit -t 43200
+
+###############
+# For Arun
+##############
+module load java/1.7.0_76
+module load gatk
+TMPDIR="/local/scratch/severin/${PBS_JOBID}"
+module load vcftools/0.1.12b
