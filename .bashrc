@@ -22,6 +22,10 @@ module load parallel
 #ulimit -s unlimited
 #OMPI_MCA_mpi_warn_on_fork=0
 
+#module improvements
+moduleraw() { eval /usr/bin/modulecmd bash $* ; }
+module() { moduleraw $* 2>&1 ; }
+alias moduleavail='cat ~/.modules;module avail > ~/.modules &'
 #git configuration
 git config --global pack.windowMemory "10m"
 git config --global pack.SizeLimit "10m"
