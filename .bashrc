@@ -14,10 +14,22 @@ module use  /data004/software/GIF/modules
 elif [ `grep -v "#" /var/spool/torque/server_name  | grep .` = "condo" ]
 then
 module use /data003/GIF/software/modules
+module use /data003/GIF/genomes/modules
 export PATH="$PATH:/data003/GIF/software/bin/"
+export GSEQ="/data003/GIF/genomes/sequences"
+export GMOD="/data003/GIF/genomes/modules"
+fi
+module purge
+module load LAS/parallel/20150922
+
+
+if [[ $- !=  *i*  ]]
+then
+   ulimit -s unlimited
+else
+   JAVA_OPTS='-Xms512m -Xmx512m -XX:MaxPermSize=256m'
 fi
 
-module load parallel
 #results directory
 module use /data005/GIF2/resultfiles/
 
@@ -27,8 +39,8 @@ module use /data005/GIF2/resultfiles/
 #OMPI_MCA_mpi_warn_on_fork=0
 
 #module improvements
-moduleraw() { eval /usr/bin/modulecmd bash $* ; }
-module() { moduleraw $* 2>&1 ; }
+#moduleraw() { eval /usr/bin/modulecmd bash $* ; }
+#module() { moduleraw $* 2>&1 ; }
 alias moduleavail='cat ~/.modules;module avail > ~/.modules &'
 #git configuration
 git config --global pack.windowMemory "10m"
@@ -113,7 +125,13 @@ export TMOUT=0
 ###############
 # For Arun
 ##############
-module load java/1.7.0_76
-module load gatk
+#module load java/1.7.0_76
+#module load gatk
 TMPDIR="/local/scratch/severin/${PBS_JOBID}"
-module load vcftools/0.1.12b
+#module purge
+#module load maker
+#module load maker/2.31.8_mpi
+#module load java/1.7.0_76
+#module load gatk
+
+#module load vcftools/0.1.12b
