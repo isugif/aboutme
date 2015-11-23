@@ -11,16 +11,23 @@ umask 0022
 if [ `grep -v "#" /var/spool/torque/server_name  | grep .` = "hpc5" ]
 then
 module use  /data004/software/GIF/modules
+module use /data006a/GIF_2a/user/modules
+module use /data006a/GIF_2a/project/modules
+
 elif [ `grep -v "#" /var/spool/torque/server_name  | grep .` = "condo" ]
 then
 module use /data003/GIF/software/modules
 module use /data003/GIF/genomes/modules
+module load LAS/parallel/20150922
+module use /data005/GIF2/resultfiles/
+
+
 export PATH="$PATH:/data003/GIF/software/bin/"
 export GSEQ="/data003/GIF/genomes/sequences"
 export GMOD="/data003/GIF/genomes/modules"
 fi
 module purge
-module load LAS/parallel/20150922
+#module load LAS/parallel/20150922
 
 
 if [[ $- !=  *i*  ]]
@@ -31,7 +38,7 @@ else
 fi
 
 #results directory
-module use /data005/GIF2/resultfiles/
+#module use /data005/GIF2/resultfiles/
 
 #eval $(perl -I/home/arnstrm/perl5/lib/perl5 -Mlocal::lib)
 #eval $(perl -I/home/severin/perl5/lib/perl5 -Mlocal::lib)
@@ -106,7 +113,7 @@ export HISTFILE=~/.bash_eternal_history
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 export PATH="~/bin:$PATH"
-export PATH="$PATH:~/isugif/common_scripts/:~/isugif/common_analyses/:~/isugif/ascii_plots:~/isugif/oneliners/"
+export PATH="$PATH:~/isugif/ProjectModules/:~/isugif/common_scripts/:~/isugif/common_analyses/:~/isugif/ascii_plots:~/isugif/oneliners/"
 ################
 # SHORTCUTS
 ################
