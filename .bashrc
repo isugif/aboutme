@@ -16,10 +16,13 @@ module use /data006a/GIF_2a/project/modules
 
 elif [ `grep -v "#" /var/spool/torque/server_name  | grep .` = "condo" ]
 then
-module use /data003/GIF/software/modules
-module use /data003/GIF/genomes/modules
-module load LAS/parallel/20150922
-module use /data005/GIF2/resultfiles/
+module use /data021/GIF/software/modules
+module use /data021/GIF/genomes/modules
+module use /data021/GIF/user/modules
+module use /data021/GIF/project/modules
+
+#module load LAS/parallel/20150922
+#module use /data005/GIF2/resultfiles/
 
 
 export PATH="$PATH:/data003/GIF/software/bin/"
