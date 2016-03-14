@@ -17,7 +17,7 @@ module use /data006a/GIF_2a/project/modules
 elif [ `grep -v "#" /var/spool/torque/server_name  | grep .` = "condo" ]
 then
 module use /data021/GIF/software/modules
-module use /data021/GIF/genomes/modules
+module use /data021/GIF/genome/modules
 module use /data021/GIF/user/modules
 module use /data021/GIF/project/modules
 
