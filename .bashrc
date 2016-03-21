@@ -23,11 +23,11 @@ module use /data021/GIF/project/modules
 
 #module load LAS/parallel/20150922
 #module use /data005/GIF2/resultfiles/
+module load severin
 
-
-export PATH="$PATH:/data003/GIF/software/bin/"
-export GSEQ="/data003/GIF/genomes/sequences"
-export GMOD="/data003/GIF/genomes/modules"
+export PATH="$PATH:/data021/GIF/software/bin/"
+export GSEQ="/data021/GIF/genomes/sequences"
+export GMOD="/data021/GIF/genomes/modules"
 fi
 module purge
 #module load LAS/parallel/20150922
@@ -120,8 +120,8 @@ export PATH="$PATH:~/isugif/ProjectModules/:~/isugif/common_scripts/:~/isugif/co
 ################
 # SHORTCUTS
 ################
-export MDIR=/data003/GIF/software/modules
-export PDIR=/data003/GIF/software/packages
+export MDIR=/data021/GIF/software/modules
+export PDIR=/data021/GIF/software/packages
 export EDITOR="nano"
 export TMOUT=0
 #export LD_PRELOAD=/shared/openmpi/gcc/lib/libmpi.so
