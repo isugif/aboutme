@@ -5,6 +5,7 @@ if [ -f /etc/bashrc ]; then
    . /etc/bashrc
  fi
 
+export TERM=xterm
 
 # start-up things
 umask 0022
@@ -28,6 +29,15 @@ module load severin
 export PATH="$PATH:/data021/GIF/software/bin/"
 export GSEQ="/data021/GIF/genomes/sequences"
 export GMOD="/data021/GIF/genomes/modules"
+
+elif [ $HOSTNAME = "br005.pvt.bridges.psc.edu" ]
+then
+module use /pylon2/mc48o5p/severin/software/modules
+modue use /pylon2/mc48o5p/severin/genome/modules
+module use /pylon2/mc48o5p/severin/user/modules
+module use /pylon2/mc48o5p/severin/project/modules
+
+
 fi
 module purge
 #module load LAS/parallel/20150922
