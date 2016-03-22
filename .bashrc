@@ -36,7 +36,7 @@ module use /pylon2/mc48o5p/severin/software/modules
 modue use /pylon2/mc48o5p/severin/genome/modules
 module use /pylon2/mc48o5p/severin/user/modules
 module use /pylon2/mc48o5p/severin/project/modules
-
+ssh-add ~/.ssh/id_rsa
 
 fi
 module purge
