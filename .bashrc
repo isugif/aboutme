@@ -9,19 +9,20 @@ export TERM=xterm
 
 # start-up things
 umask 0022
-if [ `grep -v "#" /var/spool/torque/server_name  | grep .` = "hpc5" ]
+if [ $HOSTNAME = "hpc5" ]
 then
 module use  /data004/software/GIF/modules
 module use /data006a/GIF_2a/user/modules
 module use /data006a/GIF_2a/project/modules
-
-elif [ `grep -v "#" /var/spool/torque/server_name  | grep .` = "condo" ]
+module purge
+module load severin
+elif [ $HOSTNAME = "condo" ]
 then
 module use /data021/GIF/software/modules
 module use /data021/GIF/genome/modules
 module use /data021/GIF/user/modules
 module use /data021/GIF/project/modules
-
+module purge
 #module load LAS/parallel/20150922
 #module use /data005/GIF2/resultfiles/
 module load severin
@@ -39,7 +40,6 @@ module use /pylon2/mc48o5p/severin/project/modules
 ssh-add ~/.ssh/id_rsa
 
 fi
-module purge
 #module load LAS/parallel/20150922
 
 
