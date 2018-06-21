@@ -16,18 +16,22 @@ module use /data006a/GIF_2a/user/modules
 module use /data006a/GIF_2a/project/modules
 module purge
 module load severin
-elif [ $HOSTNAME = "condo" ]
+elif [ `cat ~/hostname`  == "condo" ] 
 then
-module use /data021/GIF/software/modules
-module use /data021/GIF/genome/modules
-module use /data021/GIF/user/modules
-module use /data021/GIF/project/modules
+alias vim='/usr/bin/vim' 
+alias modbase1='export MODBASE="/shared/software/GIF"; echo "/shared/software/GIF"'
+alias modbase2='export MODBASE="/data021/GIF/";echo "/data021/GIF/"'
+#module use /data021/GIF/software/modules
+module use /work/GIF/genome/modules
+module use /work/GIF/user/modules
+module use /work/GIF/project/modules
+module use /shared/software/GIF/modules/
 module purge
 #module load LAS/parallel/20150922
 #module use /data005/GIF2/resultfiles/
 module load severin
 
-export PATH="$PATH:/data021/GIF/software/bin/"
+export PATH="~/isugif/utilities/utilities/:$PATH:/data021/GIF/software/bin/"
 export GSEQ="/data021/GIF/genomes/sequences"
 export GMOD="/data021/GIF/genomes/modules"
 
@@ -50,6 +54,7 @@ else
    JAVA_OPTS='-Xms512m -Xmx512m -XX:MaxPermSize=256m'
 fi
 
+#module load LAS/java/1.8.0_60
 #results directory
 #module use /data005/GIF2/resultfiles/
 
@@ -68,6 +73,7 @@ git config --global pack.SizeLimit "10m"
 git config --global pack.threads "1"
 
 # Alias definitions.
+alias jrc='JRC.sh'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -101,7 +107,7 @@ alias dT='du -hs * | awk '$1~"T"''
 
 
 #severin
-alias wcp="wc -l - | awk '{s+="'$1'"} END {print s}'"
+alias wcp="parallel  --block 1G --pipe wc -l | awk '{s+=$1} END {print s}'"
 alias qf="qn | grep free | wc -l"
 alias awkt='awk -F "\t"'
 alias pwd='pwd -P'
@@ -126,7 +132,7 @@ export HISTFILE=~/.bash_eternal_history
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 export PATH="~/bin:$PATH"
-export PATH="$PATH:~/isugif/ProjectModules/:~/isugif/common_scripts/:~/isugif/common_analyses/:~/isugif/ascii_plots:~/isugif/oneliners/"
+export PATH="$PATH:/home/severin/.local/bin:~/isugif/utilities/wrappers/:~/isugif/ProjectModules/:~/isugif/common_scripts/:~/isugif/common_analyses/:~/isugif/ascii_plots:~/isugif/oneliners/"
 ################
 # SHORTCUTS
 ################
@@ -147,7 +153,7 @@ export TMOUT=0
 ##############
 #module load java/1.7.0_76
 #module load gatk
-TMPDIR="/local/scratch/severin/${PBS_JOBID}"
+TMPDIR="/scratch/severin/${PBS_JOBID}"
 #module purge
 #module load maker
 #module load maker/2.31.8_mpi
@@ -161,3 +167,18 @@ PERL5LIB="/home/severin/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LI
 PERL_LOCAL_LIB_ROOT="/home/severin/perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/severin/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/severin/perl5"; export PERL_MM_OPT;
+
+alias si="sinfo -o \"%20P %5D %14F %8z %10m %10d %11l %16f %N\""
+alias sq="squeue -o \"%8i %12j %4t %10u %20q %20a %10g %20P %10Q %5D %11l %11L %R\""
+alias canu='/work/GIF/severin/Purcell/WhiteAbalone2018/canu/Linux-amd64/bin/canu'
+
+
+# Avoid duplicates
+export HISTCONTROL=ignoredups:erasedups  
+# When the shell exits, append to the history file instead of overwriting it
+shopt -s histappend
+
+# After each command, append to the history file and reread it
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
+alias ceres="ssh -X andrew.severin@scinet-login.bioteam.net"
