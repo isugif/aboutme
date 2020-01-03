@@ -9,14 +9,7 @@ export TERM=xterm
 
 # start-up things
 umask 0022
-if [ $HOSTNAME = "hpc5" ]
-then
-module use  /data004/software/GIF/modules
-module use /data006a/GIF_2a/user/modules
-module use /data006a/GIF_2a/project/modules
-module purge
-module load severin
-elif [ `cat ~/hostname`  == "condo" ] 
+if [ `cat ~/hostname`  == "condo" ] 
 then
 alias vim='/usr/bin/vim' 
 alias modbase1='export MODBASE="/shared/software/GIF"; echo "/shared/software/GIF"'
@@ -31,7 +24,7 @@ module purge
 #module use /data005/GIF2/resultfiles/
 module load severin
 
-export PATH="~/isugif/utilities/utilities/:$PATH:/data021/GIF/software/bin/"
+export PATH="~/isugif/utilities/utilities/:$PATH"
 export GSEQ="/data021/GIF/genomes/sequences"
 export GMOD="/data021/GIF/genomes/modules"
 
@@ -42,17 +35,17 @@ modue use /pylon2/mc48o5p/severin/genome/modules
 module use /pylon2/mc48o5p/severin/user/modules
 module use /pylon2/mc48o5p/severin/project/modules
 ssh-add ~/.ssh/id_rsa
-
 fi
+
 #module load LAS/parallel/20150922
 
 
-if [[ $- !=  *i*  ]]
-then
-   ulimit -s unlimited
-else
-   JAVA_OPTS='-Xms512m -Xmx512m -XX:MaxPermSize=256m'
-fi
+#if [[ $- !=  *i*  ]]
+#then
+#   ulimit -s unlimited
+#else
+#   JAVA_OPTS='-Xms512m -Xmx512m -XX:MaxPermSize=256m'
+#fi
 
 #module load LAS/java/1.8.0_60
 #results directory
@@ -181,4 +174,13 @@ shopt -s histappend
 # After each command, append to the history file and reread it
 export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
 
-alias ceres="ssh -X andrew.severin@scinet-login.bioteam.net"
+alias ceres="ssh -X andrew.severin@login.scinet.science"
+alias gittree="git log --all --decorate --oneline --graph"
+
+# Miniconda
+module load miniconda3
+source activate my_root
+
+# Group storage usage
+
+cat /work/GIF/group_storage_usage
