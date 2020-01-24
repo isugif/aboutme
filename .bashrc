@@ -3,7 +3,7 @@
 # Source global definitions
 if [ -f /etc/bashrc ]; then
    . /etc/bashrc
- fi
+fi
 
 export TERM=xterm
 
@@ -86,15 +86,15 @@ alias lr='ls -lR'          # recursive ls
 alias ld='ls -d */'                     # list directories only
 alias ll='ls -l'
 alias lsr='tree -Csu'     # nice alternative to 'recursive ls'
-alias scp-resume="rsync --partial -h --progress --rsh=ssh"
+#alias scp-resume="rsync --partial -h --progress --rsh=ssh"
 alias git-commit-count="git log --pretty=format:'' | wc -l"
-alias pep8="pep8 --ignore=E501 -r"
-alias qs="qstat -a -u severin"
-alias qall="qstat -a"
-alias qjobs="qstat -r"
+#alias pep8="pep8 --ignore=E501 -r"
+#alias qs="qstat -a -u severin"
+#alias qall="qstat -a"
+#alias qjobs="qstat -r"
 alias dirtree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
-alias qs512="qsub -I -l mem=512Gb,nodes=1:ppn=32:ib32,walltime=48:00:00 -N test"
-alias qI16="qsub -I -N test -l nodes=1:ppn=16 -l walltime=4:00:00"
+#alias qs512="qsub -I -l mem=512Gb,nodes=1:ppn=32:ib32,walltime=48:00:00 -N test"
+#alias qI16="qsub -I -N test -l nodes=1:ppn=16 -l walltime=4:00:00"
 alias dG='du -hs * | awk '$1~"G"''
 alias dT='du -hs * | awk '$1~"T"''
 
@@ -115,7 +115,6 @@ alias gpr='find . -type d -name .git -exec sh -c "cd \"{}\"/../ && pwd && git pu
 
 # Custom prompts (choose 1)
 # PS1 (keep only one active)
-# PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;31m\]`git branch 2>/dev/null | grep ^* | tr -d \*` \[\033[01;34m\]\$\[\033[00m\] '
 PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w\[\033[01;31m\]\[\033[01;34m\]\$\[\033[00m\] ' # git friendly 
 # Making never ending history!
 export HISTFILESIZE=
@@ -163,7 +162,7 @@ PERL_MM_OPT="INSTALL_BASE=/home/severin/perl5"; export PERL_MM_OPT;
 
 alias si="sinfo -o \"%20P %5D %14F %8z %10m %10d %11l %16f %N\""
 alias sq="squeue -o \"%8i %12j %4t %10u %20q %20a %10g %20P %10Q %5D %11l %11L %R\""
-alias canu='/work/GIF/severin/Purcell/WhiteAbalone2018/canu/Linux-amd64/bin/canu'
+#alias canu='/work/GIF/severin/Purcell/WhiteAbalone2018/canu/Linux-amd64/bin/canu'
 
 
 # Avoid duplicates
