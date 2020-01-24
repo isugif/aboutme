@@ -179,7 +179,7 @@ alias gittree="git log --all --decorate --oneline --graph"
 
 # Miniconda
 module load miniconda3
-source activate my_root
+#source activate my_root
 
 # Group storage usage
 
