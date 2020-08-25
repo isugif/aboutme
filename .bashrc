@@ -1,69 +1,51 @@
 
 # /etc/skel/.bashrc
 # Source global definitions
+
 if [ -f /etc/bashrc ]; then
-   . /etc/bashrc
+    . /etc/bashrc
 fi
 
 export TERM=xterm
 
 # start-up things
 umask 0022
-if [ `cat ~/hostname`  == "condo" ] 
-then
+#if [ `cat ~/hostname`  == "condo" ] 
+#then
 alias vim='/usr/bin/vim' 
-alias modbase1='export MODBASE="/shared/software/GIF"; echo "/shared/software/GIF"'
-alias modbase2='export MODBASE="/data021/GIF/";echo "/data021/GIF/"'
+#alias modbase1='export MODBASE="/shared/software/GIF"; echo "/shared/software/GIF"'
+#alias modbase2='export MODBASE="/data021/GIF/";echo "/data021/GIF/"'
 #module use /data021/GIF/software/modules
-module use /work/GIF/genome/modules
-module use /work/GIF/user/modules
-module use /work/GIF/project/modules
-module use /shared/software/GIF/modules/
-module purge
+#module use /work/GIF/genome/modules
+#module use /work/GIF/user/modules
+#module use /work/GIF/project/modules
+#module use /shared/software/GIF/modules/
+#module purge
 #module load LAS/parallel/20150922
 #module use /data005/GIF2/resultfiles/
-module load severin
+#module load severin
 
-export PATH="~/isugif/utilities/utilities/:$PATH"
-export GSEQ="/data021/GIF/genomes/sequences"
-export GMOD="/data021/GIF/genomes/modules"
+#export PATH="~/isugif/utilities/utilities/:$PATH"
+#export GSEQ="/data021/GIF/genomes/sequences"
+#export GMOD="/data021/GIF/genomes/modules"
 
-elif [ $HOSTNAME = "br005.pvt.bridges.psc.edu" ]
-then
-module use /pylon2/mc48o5p/severin/software/modules
-modue use /pylon2/mc48o5p/severin/genome/modules
-module use /pylon2/mc48o5p/severin/user/modules
-module use /pylon2/mc48o5p/severin/project/modules
-ssh-add ~/.ssh/id_rsa
-fi
-
-#module load LAS/parallel/20150922
-
-
-#if [[ $- !=  *i*  ]]
+#elif [ $HOSTNAME = "br005.pvt.bridges.psc.edu" ]
 #then
-#   ulimit -s unlimited
-#else
-#   JAVA_OPTS='-Xms512m -Xmx512m -XX:MaxPermSize=256m'
+#module use /pylon2/mc48o5p/severin/software/modules
+#modue use /pylon2/mc48o5p/severin/genome/modules
+#module use /pylon2/mc48o5p/severin/user/modules
+#module use /pylon2/mc48o5p/severin/project/modules
+#ssh-add ~/.ssh/id_rsa
 #fi
 
-#module load LAS/java/1.8.0_60
-#results directory
-#module use /data005/GIF2/resultfiles/
-
-#eval $(perl -I/home/arnstrm/perl5/lib/perl5 -Mlocal::lib)
-#eval $(perl -I/home/severin/perl5/lib/perl5 -Mlocal::lib)
-#ulimit -s unlimited
-#OMPI_MCA_mpi_warn_on_fork=0
-
-#module improvements
-#moduleraw() { eval /usr/bin/modulecmd bash $* ; }
-#module() { moduleraw $* 2>&1 ; }
 alias moduleavail='cat ~/.modules;module avail > ~/.modules &'
+
+export PATH="~/isugif/utilities/utilities/:$PATH"
+
 #git configuration
-git config --global pack.windowMemory "10m"
-git config --global pack.SizeLimit "10m"
-git config --global pack.threads "1"
+#git config --global pack.windowMemory "10m"
+#git config --global pack.SizeLimit "10m"
+#git config --global pack.threads "1"
 
 # Alias definitions.
 alias jrc='JRC.sh'
@@ -104,11 +86,13 @@ alias wcp="parallel  --block 1G --pipe wc -l | awk '{s+=$1} END {print s}'"
 alias qf="qn | grep free | wc -l"
 alias awkt='awk -F "\t"'
 alias pwd='pwd -P'
+
 #git
 alias gc='git commit -m' 
 alias gpom='git push origin master'
 alias ga='git add'
 alias gpr='find . -type d -name .git -exec sh -c "cd \"{}\"/../ && pwd && git pull" \;'
+alias gclone='git clone git clone git@github.com:ISUgenomics/$1'
 #############
 # Prompt Configuration
 #############
@@ -124,7 +108,7 @@ export HISTFILE=~/.bash_eternal_history
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 export PATH="~/bin:$PATH"
-export PATH="$PATH:/home/severin/.local/bin:~/isugif/utilities/wrappers/:~/isugif/ProjectModules/:~/isugif/common_scripts/:~/isugif/common_analyses/:~/isugif/ascii_plots:~/isugif/oneliners/"
+export PATH="$PATH:/home/severin/.local/bin:~/isugif/utilities/utililities/:~/isugif/ProjectModules/:~/isugif/common_scripts/:~/isugif/common_analyses/:~/isugif/ascii_plots:~/isugif/oneliners/"
 ################
 # SHORTCUTS
 ################
@@ -182,4 +166,58 @@ module load miniconda3
 
 # Group storage usage
 
+if shopt -q login_shell; then
+
 cat /work/GIF/group_storage_usage
+cat /work/gif/group_storage_usage
+fi
+
+alias gpu="salloc --gres=gpu -N 1-1 -n 36 -t 4:00:00  -p novagpu"
+
+
+## swift alias
+#alias swift="singularity exec --bind /work/gif/software/swift/bin /work/gif/software/swift/swift_latest.sif swift"
+export PATH="$PATH:/work/gif/software/swift/bin/"
+
+
+###############################
+## FUNCTIONS
+###############################
+
+calc(){ awk "BEGIN { print "$*" }"; }
+pathadd(){ export PATH=$PATH:$1; }
+
+function extract()      # Handy Extract Program.
+{
+     if [ -f $1 ] ; then
+         case $1 in
+             *.tar.bz2)   tar xvjf $1     ;;
+             *.tar.gz)    tar xvzf $1     ;;
+             *.bz2)       bunzip2 $1      ;;
+             *.rar)       unrar x $1      ;;
+             *.gz)        gunzip $1       ;;
+             *.tar)       tar xvf $1      ;;
+             *.tbz2)      tar xvjf $1     ;;
+             *.tgz)       tar xvzf $1     ;;
+             *.zip)       unzip $1        ;;
+             *.Z)         uncompress $1   ;;
+             *.7z)        7z x $1         ;;
+             *.tar.xz)    tar xJvf $1     ;;
+             *)           echo "'$1' cannot be extracted via >extract<" ;;
+         esac
+     else
+         echo "'$1' is not a valid file"
+     fi
+}
+# Find a file with a pattern in name:
+function ff() { find $(pwd -P) -type f -iname '*'$*'*' -ls ; }
+function fd() { find $(pwd -P) -type d -iname '*'$*'*' -ls ; }
+#it puts line number for grep matches, but only when it is at the end of the pipe
+function grep() {
+    if [[ -t 1 ]]; then
+        command grep -n "$@"
+    else
+        command grep "$@"
+    fi
+module use /work/gif/modules//software/
+module load gcc/7.3.0-xegsmw4 nextflow
